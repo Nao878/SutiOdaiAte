@@ -13,6 +13,9 @@ public class GameController : MonoBehaviour
     private readonly Color warningColor = new Color(0.95f, 0.6f, 0.2f, 1f);
     private readonly Color dangerColor = new Color(0.9f, 0.3f, 0.3f, 1f);
     private readonly Color bgColor = new Color(0.12f, 0.12f, 0.18f, 1f);
+    [Header("フォント設定")]
+    [Tooltip("AppFont SDFをここにドラッグ＆ドロップしてください")]
+    public TMP_FontAsset appFont;
     
     // UI参照
     private Canvas mainCanvas;
@@ -43,12 +46,46 @@ public class GameController : MonoBehaviour
             gmObj.AddComponent<GameManager>();
         }
 
+        // フォントをロード
+        LoadFont();
+
         // UIを生成
         CreateCanvas();
         CreateAllPanels();
         
         // 初期画面を表示
         ShowPanel(playerCountPanel);
+    }
+
+    /// <summary>
+    /// AppFont SDFフォントをロード
+    /// </summary>
+    private void LoadFont()
+    {
+        // Inspectorで設定済みならスキップ
+        if (appFont != null) return;
+        
+        // TextMesh Pro/Fonts フォルダからフォントをロード
+        appFont = Resources.Load<TMP_FontAsset>("Fonts/AppFont SDF");
+        
+        // Resourcesからロードできない場合は、ロード済みアセットから検索
+        if (appFont == null)
+        {
+            var fonts = Resources.FindObjectsOfTypeAll<TMP_FontAsset>();
+            foreach (var font in fonts)
+            {
+                if (font.name.Contains("AppFont"))
+                {
+                    appFont = font;
+                    break;
+                }
+            }
+        }
+        
+        if (appFont == null)
+        {
+            Debug.LogWarning("AppFont SDFが見つかりません。Inspectorで設定するか、デフォルトフォントを使用します。");
+        }
     }
 
     #region キャンバス作成
@@ -286,6 +323,12 @@ public class GameController : MonoBehaviour
         tmpText.color = Color.white;
         tmpText.alignment = TextAlignmentOptions.Center;
         tmpText.enableWordWrapping = true;
+        
+        // AppFontが設定されていれば使用
+        if (appFont != null)
+        {
+            tmpText.font = appFont;
+        }
 
         return tmpText;
     }
