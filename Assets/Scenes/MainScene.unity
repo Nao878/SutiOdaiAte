@@ -939,7 +939,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1083,10 +1083,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf1c75d11bc48bf438384274a199183a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  valueInput: {fileID: 1636429230}
+  hintInputField: {fileID: 0}
   playerNumberText: {fileID: 1559708562}
-  gameManager: {fileID: 1704057406}
-  uiManager: {fileID: 1666183977}
 --- !u!1 &1559708560
 GameObject:
   m_ObjectHideFlags: 0
@@ -1522,11 +1520,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCountPanel: {fileID: 1179730050}
+  coverPanel: {fileID: 0}
   topicPanel: {fileID: 1632803338}
-  inputPanel: {fileID: 567257599}
+  hintInputPanel: {fileID: 0}
+  answerPanel: {fileID: 0}
   resultPanel: {fileID: 1272420204}
+  coverMessageText: {fileID: 0}
   topicText: {fileID: 100812142}
+  topicViewersText: {fileID: 0}
+  hintInputPlayerText: {fileID: 0}
+  hintsDisplayText: {fileID: 0}
   resultText: {fileID: 909043373}
+  roundText: {fileID: 0}
 --- !u!1 &1704057404
 GameObject:
   m_ObjectHideFlags: 0
@@ -1572,9 +1577,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCount: 2
-  playerValues: 00000000000000000000000000000000
+  playerNames: []
   topic: "\u30B9\u30DE\u30DB\u306E\u901A\u77E5\u306E\u6570"
   isTopicRandom: 1
+  currentState: 0
+  answererIndex: 0
+  hintValues: []
+  currentRound: 1
 --- !u!1 &1806963947
 GameObject:
   m_ObjectHideFlags: 0
